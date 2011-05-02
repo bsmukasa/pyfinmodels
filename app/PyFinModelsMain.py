@@ -3,7 +3,7 @@ from PyQt4 import QtGui, QtCore
 from MainWindow import Ui_MainWindow
 import numpy as np
 import PyFinModel
-from ..models.BinomialTreeModel import BinomialTreeModel
+from models.BinomialTreeModel import BinomialTreeModel
 
 
 class PyFinModelsApp(QtGui.QMainWindow):
