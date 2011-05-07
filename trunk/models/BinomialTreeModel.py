@@ -3,23 +3,20 @@ from functools import partial as functools_partial
 from math import exp, sqrt
 from numpy import zeros, flipud
 
-## u = exp(mu * srqt(t))
-## d = exp(-mu * sqrt(t))
-## 
 class BinomialTreeModel(PyFinModel):
   def __init__(self, data):
     self.properties = ModelProperties([["s0", 100, "Spot Price"], ["r", 0.06, "Interest Rate"], 
                                        ["v", 0.2, "Volatility"], ["t", 1, "Time to Maturity"], 
-                                       ["k", 100, "Strike Price"], ["n", 50, "Number of steps in the Binomial tree"]])
+                                       ["k", 100, "Strike Price"], ["n", 150, "Number of steps in the Binomial tree"]])
     PyFinModel.__init__(self, data)
   
   def getProperties(self):
     return self.properties.getPropertyList()
   
-  def getModelName():
+  def getModelName(self):
     return "Binomial Tree Model"
   
-  def getModelLink():
+  def getModelLink(self):
     return "http://www.google.com"
   
   def getActions(self):

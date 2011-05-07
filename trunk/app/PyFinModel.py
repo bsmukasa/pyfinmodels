@@ -1,6 +1,7 @@
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-from matplotlib import font_manager
+from PyQt4 import QtGui, QtCore
+
 import matplotlib as mpl
 
 class ModelProperties:
@@ -42,20 +43,20 @@ class PyFinModel:
   def __init__(self, appWindow):
     self.appWindow = appWindow
 
-  def raiseABCError():
+  def raiseABCError(self):
     raise "Abstract Method Invoked!"
 
-  def getModelName():
-    raiseABCError
+  def getModelName(self):
+    self.raiseABCError()
 
-  def getModelLink():
-    raiseABCError
+  def getModelLink(self):
+    self.raiseABCError()
 
   def getProperties(self):
-    raiseABCError
+    self.raiseABCError()
 
   def getActions(self):
-    raiseABCError
+    self.raiseABCError()
 
   def show1DData(self, name, array):
     self.appWindow.add1DData(name, array)
@@ -67,4 +68,4 @@ class PyFinModel:
     self.appWindow.add2DGraph(name, pyFinChart)
 
   def notifyState(self, pct, text):
-    raiseABCError
+    self.raiseABCError()
