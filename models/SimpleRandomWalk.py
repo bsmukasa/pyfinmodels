@@ -1,4 +1,4 @@
-from PyFinModel import PyFinModel, ModelProperties
+from ..PyFinModel import PyFinModel, ModelProperties
 from functools import partial as functools_partial
 from math import exp, sqrt
 from numpy import zeros, flipud
@@ -15,10 +15,10 @@ class SimpleRandomWalk(PyFinModel):
   def getProperties(self):
     return self.properties.getPropertyList()
   
-  def getModelName():
+  def getModelName(self):
     return "Binomial Tree Model"
   
-  def getModelLink():
+  def getModelLink(self):
     return "http://www.google.com"
   
   def getActions(self):

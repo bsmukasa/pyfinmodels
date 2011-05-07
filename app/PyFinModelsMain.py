@@ -1,8 +1,6 @@
 import sys
 from PyQt4 import QtGui, QtCore
 from MainWindow import Ui_MainWindow
-import numpy as np
-import PyFinModel
 from models.BinomialTreeModel import BinomialTreeModel
 
 
@@ -43,8 +41,9 @@ class PyFinModelsApp(QtGui.QMainWindow):
       self.getSheet().setItem(self.sheetrow, col+1, itemVal)
       self.sheetrow += 1
 
-  def addActions(self, actionDict):
+  def addModelActions(self, actionDict):
     col = 0
+
     for x in actionDict:
       btn = QtGui.QPushButton(x, self.getSheet())
       btn.setFont(self.getSheet().font())
@@ -97,13 +96,13 @@ class PyFinModelsApp(QtGui.QMainWindow):
   def loadModel(self, model):
     self.getSheet().clearContents()
     self.addProperties(model.getProperties())
-    self.addActions(model.getActions())
+    self.addModelActions(model.getActions())
 
 
 if __name__ == "__main__":
   app = QtGui.QApplication(sys.argv)
   window = PyFinModelsApp()
-
-  window.loadModel(BinomialTreeModel(window))
+  model = BinomialTreeModel(window)
+  window.loadModel(model)
   window.show()
   sys.exit(app.exec_())
