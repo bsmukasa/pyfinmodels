@@ -1,36 +1,30 @@
-from PyFinModel import PyFinModel, ModelProperties
+from PyFinModel import PyFinModel, ModelProperties, MdlProp
 from functools import partial as functools_partial
 from math import exp, sqrt
 from numpy import zeros, flipud
 
 class BinomialTreeModel(PyFinModel):
   def __init__(self, data):
-    self.properties = ModelProperties([["s0", 100, "Spot Price"], ["r", 0.06, "Interest Rate"], 
-                                       ["v", 0.2, "Volatility"], ["t", 1, "Time to Maturity"], 
-                                       ["k", 100, "Strike Price"], ["n", 150, "Number of steps in the Binomial tree"]])
-    PyFinModel.__init__(self, data)
-  
-  def getProperties(self):
-    return self.properties.getPropertyList()
-  
+    properties = ModelProperties([MdlProp('s0', 100, 3, "Spot Price"),
+                                       MdlProp('r', 0.06, 3, "Interest Rate"),
+                                       MdlProp('v', 0.2, 3, "Volatility"),
+                                       MdlProp('t', 1, 3, "Time to Maturity"),
+                                       MdlProp('k', 100, 3, "Strike Price"),
+                                       MdlProp('n', 5, 1, "Number of steps in the Binomial tree")])
+    PyFinModel.__init__(self, properties, data)
+
   def getModelName(self):
     return "Binomial Tree Model"
   
   def getModelLink(self):
     return "http://www.google.com"
   
-  def getActions(self):
+  def getModelActions(self):
     runModel = functools_partial(BinomialTreeModel.runModel, self)
     return {"Run Model": runModel}
-  
-  def setupProperties(self, prop):
-    for x in prop.keyval:
-      self.__dict__[x] = prop.keyval[x]
-      
     
-  def runModel(self, prop):
-    self.setupProperties(self.properties)
-
+  def runModel(self, props):
+    self.setupProperties(props)
     dt = float(self.t)/self.n
     nu = self.r - 0.5 * pow(self.v, 2)
     dxu = sqrt(pow(self.v, 2) * dt + pow((nu * dt), 2))
